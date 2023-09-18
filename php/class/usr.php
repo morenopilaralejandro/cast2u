@@ -8,11 +8,10 @@ class Usr {
     private string $email;
 
     //db
-    public function getVideoByIdVid(int $idVid): Array {   
-        $sql = 'select id_vid as idVid, url, img, title, upload_date as uploadDate, 
-            counter_enabled as counterEnabled, counter_value as counterValue, 
-            id_usr as idUsr from video where id_vid = :idVid';
-        $params = ['idVid' => $idVid];
+    public function getUsrByIdUsr(int $idUsr): Array {   
+        $sql = 'select id_usr as idUsr, usr_name as usrName, pwd, email 
+            from usr where id_usr = :idUsr';
+        $params = ['idUsr' => $idUsr];
         //placeholder parameters for constructor
         $ctor_args= [0, '', '', ''];
 
@@ -21,7 +20,7 @@ class Usr {
         try{ 
             $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
             $stm->execute($params);
-            return $stm->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Video', $ctor_args);
+            return $stm->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Usr', $ctor_args);
         } catch(PDOException $e) { 
             echo $e->getMessage();
             return Array();
@@ -31,17 +30,13 @@ class Usr {
     public function insert(int $idUsr, string $usrName, 
         string $pwd, string $email): bool {
         
-        $sql = 'insert into video (url, img, title, upload_date, 
-            counter_enabled, counter_value, id_usr) values (:url, :img, :title, 
-            SYSDATE(), :counterEnabled, :counterValue, :idUsr)';
+        $sql = 'insert into usr (id_usr, usr_name, pwd, email) 
+            values (:idUsr, :usrName, :pwd, :email)';
         $params = [
-            'url' => $url, 
-            'img' => $img, 
-            'title' => $title, 
-            //uploadDate ------> SYSDATE()
-            'counterEnabled' => false, 
-            'counterValue' => 0,
-            'idUsr' => $idUsr]; 
+            'idUsr' => $idUsr, 
+            'usrName' => $usrName, 
+            'pwd' => $pwd, 
+            'email' => $email]; 
      
         $con = new DbConnection();
         $link = $con->getConnection();
@@ -55,8 +50,8 @@ class Usr {
     }
 
     public function delete(): bool { 
-        $sql = 'delete from video where id_vid = :idVid';
-        $params = ['idVid' => $idVid]; 
+        $sql = 'delete from usr where id_usr = :idUsr';
+        $params = ['idUsr' => $this->idUsr]; 
      
         $con = new DbConnection();
         $link = $con->getConnection();
@@ -73,17 +68,35 @@ class Usr {
     public function __construct(int $idUsr, string $usrName, 
         string $pwd, string $email) {
         
-        $this->asd=$asd;
+        $this->idUsr=$idUsr;
+        $this->usrName=$usrName;
+        $this->pwd=$pwd;
+        $this->email=$email;
     }
 
     //factory
-    public static function factory() : Video {
+    public static function factory() : Usr {
         return new Usr(0, '', '', '');
     } 
 
     //setter getter
-        public function setIdUsr(int $idUsr): bool { 
+    public function setIdUsr(int $idUsr): bool { 
         $this->idUsr = $idUsr; 
+
+        $sql = 'update usr set id_usr = :newIdUsr where id_usr = :idUsr';
+        $params = [
+            'newIdUsr' => $idUsr,
+            'idUsr' => $this->idUsr]; 
+     
+        $con = new DbConnection();
+        $link = $con->getConnection();
+        try{ 
+            $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+            return $stm->execute($params);
+        } catch(PDOException $e) { 
+            echo $e->getMessage();
+            return false;
+        }     
     }
     public function getIdUsr(): int { 
         return $this->idUsr; 
@@ -91,13 +104,43 @@ class Usr {
 
     public function setUsrName(string $usrName): bool { 
         $this->usrName = $usrName; 
+
+        $sql = 'update usr set usr_name = :usrName where id_usr = :idUsr';
+        $params = [
+            'usrName' => $usrName,
+            'idUsr' => $this->idUsr]; 
+     
+        $con = new DbConnection();
+        $link = $con->getConnection();
+        try{ 
+            $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+            return $stm->execute($params);
+        } catch(PDOException $e) { 
+            echo $e->getMessage();
+            return false;
+        } 
     }
     public function getUsrName(): string { 
         return $this->usrName;
     }
 
     public function setPwd(string $pwd): bool { 
-        $this->pwd = $pwd; 
+        $this->pwd = $pwd;
+
+        $sql = 'update usr set pwd = :pwd where id_usr = :idUsr';
+        $params = [
+            'pwd' => $pwd,
+            'idUsr' => $this->idUsr]; 
+     
+        $con = new DbConnection();
+        $link = $con->getConnection();
+        try{ 
+            $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+            return $stm->execute($params);
+        } catch(PDOException $e) { 
+            echo $e->getMessage();
+            return false;
+        }  
     }
     public function getPwd(): string { 
         return $this->pwd; 
@@ -105,6 +148,21 @@ class Usr {
 
     public function setEmail(string $email): bool { 
         $this->email = $email; 
+
+        $sql = 'update usr set email = :email where id_usr = :idUsr';
+        $params = [
+            'email' => $email,
+            'idUsr' => $this->idUsr]; 
+     
+        $con = new DbConnection();
+        $link = $con->getConnection();
+        try{ 
+            $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+            return $stm->execute($params);
+        } catch(PDOException $e) { 
+            echo $e->getMessage();
+            return false;
+        }
     }
     public function getEmail(): string { 
         return $this->email; 

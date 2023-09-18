@@ -80,7 +80,7 @@ class Video {
 
     public function delete(): bool { 
         $sql = 'delete from video where id_vid = :idVid';
-        $params = ['idVid' => $idVid]; 
+        $params = ['idVid' => $this->idVid]; 
      
         $con = new DbConnection();
         $link = $con->getConnection();
