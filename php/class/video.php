@@ -8,16 +8,17 @@ class Video {
     private string $uploadDate;
     private bool $counterEnabled;
     private int $counterValue;
+    private int $orderValue;
     private int $idUsr;
     
     //db
     public function getVideoByIdVid(int $idVid): Array {   
         $sql = 'select id_vid as idVid, url, img, title, upload_date as uploadDate, 
             counter_enabled as counterEnabled, counter_value as counterValue, 
-            id_usr as idUsr from video where id_vid = :idVid';
+            order_value as orderValue, id_usr as idUsr from video where id_vid = :idVid';
         $params = ['idVid' => $idVid];
         //placeholder parameters for constructor
-        $ctor_args= [0, '', '', '', '', '', 0, 0];
+        $ctor_args= [0, '', '', '', '', '', 0, 0, 0];
 
         $con = new DbConnection();
         $link = $con->getConnection();
@@ -34,10 +35,10 @@ class Video {
     public function getVideoByIdUsr(int $idUsr): Array {   
         $sql = 'select id_vid as idVid, url, img, title, upload_date as uploadDate, 
             counter_enabled as counterEnabled, counter_value as counterValue, 
-            id_usr as idUsr from video where id_usr = :idUsr';
+            order_value as orderValue, id_usr as idUsr from video where id_usr = :idUsr';
         $params = ['idUsr' => $idUsr];
         //placeholder parameters for constructor
-        $ctor_args= [0, '', '', '', '', '', 0, 0];
+        $ctor_args= [0, '', '', '', '', '', 0, 0, 0];
 
         $con = new DbConnection();
         $link = $con->getConnection();
@@ -53,11 +54,11 @@ class Video {
 
     public function insert(int $idVid, string $url, string $img, 
         string $title, string $uploadDate, bool $counterEnabled, 
-        int $counterValue, int $idUsr): bool {
+        int $counterValue, int $orderValue, int $idUsr): bool {
         
         $sql = 'insert into video (url, img, title, upload_date, 
-            counter_enabled, counter_value, id_usr) values (:url, :img, :title, 
-            SYSDATE(), :counterEnabled, :counterValue, :idUsr)';
+            counter_enabled, counter_value, order_value, id_usr) values (:url, :img, :title, 
+            SYSDATE(), :counterEnabled, :counterValue, :orderValue, :idUsr)';
         $params = [
             'url' => $url, 
             'img' => $img, 
@@ -65,6 +66,7 @@ class Video {
             //uploadDate ------> SYSDATE()
             'counterEnabled' => false, 
             'counterValue' => 0,
+            'orderValue' => 0,
             'idUsr' => $idUsr]; 
      
         $con = new DbConnection();
@@ -96,7 +98,7 @@ class Video {
     //constructor
     public function __construct(int $idVid, string $url, string $img, 
         string $title, string $uploadDate, bool $counterEnabled, 
-        int $counterValue, int $idUsr) {
+        int $counterValue, int $orderValue, int $idUsr) {
         
         $this->idVid=$idVid;
         $this->url=$url;
@@ -105,12 +107,13 @@ class Video {
         $this->uploadDate=$uploadDate;
         $this->counterEnabled=$counterEnabled;
         $this->counterValue=$counterValue;
+        $this->orderValue=$orderValue;
         $this->idUsr=$idUsr;
     }
 
     //factory
     public static function factory() : Video {
-        return new Video(0, '', '', '', '', false, 0, 0);
+        return new Video(0, '', '', '', '', false, 0 ,0, 0);
     } 
 
     //setter getter
@@ -266,6 +269,28 @@ class Video {
     }
     public function getCounterValue(): int { 
         return $this->counterValue; 
+    }
+
+    public function setOrderValue(int $orderValue): bool { 
+        $this->orderValue = $orderValue; 
+
+        $sql = 'update video set order_value = :orderValue where id_vid = :idVid';
+        $params = [
+            'orderValue' => $orderValue,
+            'idVid' => $this->idVid]; 
+     
+        $con = new DbConnection();
+        $link = $con->getConnection();
+        try{ 
+            $stm = $link->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+            return $stm->execute($params);
+        } catch(PDOException $e) { 
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    public function getOrderValue): int { 
+        return $this->orderValue; 
     }
 
     public function setIdUsr(int $idUsr): bool { 

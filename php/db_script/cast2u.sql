@@ -22,6 +22,7 @@ create table usr (
 create table token (
 	id_token int not null auto_increment,
 	string_token varchar(255),
+    creation_date date,
 	id_usr int,
 	constraint pk_token primary key (id_token),
 	constraint fk_token_usr foreign key (id_usr) 
@@ -35,7 +36,8 @@ create table video(
 	title varchar(32), 
 	upload_date date,
     counter_enabled boolean,
-    counter_value int(4),     
+    counter_value int(4),
+    order_value int,     
 	id_usr int,
 	constraint pk_vid primary key (id_vid),
 	constraint fk_vid_usr foreign key (id_usr) 

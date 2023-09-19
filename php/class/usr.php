@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../dbConnection.php';
 class Usr {
-    //TODO db_connection
     private int $idUsr;
     private string $usrName;
     private string $pwd;
@@ -30,10 +29,9 @@ class Usr {
     public function insert(int $idUsr, string $usrName, 
         string $pwd, string $email): bool {
         
-        $sql = 'insert into usr (id_usr, usr_name, pwd, email) 
-            values (:idUsr, :usrName, :pwd, :email)';
+        $sql = 'insert into usr (usr_name, pwd, email) 
+            values (:usrName, :pwd, :email)';
         $params = [
-            'idUsr' => $idUsr, 
             'usrName' => $usrName, 
             'pwd' => $pwd, 
             'email' => $email]; 

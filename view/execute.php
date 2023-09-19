@@ -1,6 +1,4 @@
 <?php
-    //TODO
-    //renombrar por confirm y mostrar pop up si es necesario 
 	include_once "../php/funDb.php";
 	include_once '../php/bd.php'; 
 	include_once "../php/cookieManager.php";
