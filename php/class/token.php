@@ -1,11 +1,16 @@
 <?php
 require_once __DIR__ . '/../dbConnection.php';
 class Video {
-    //TODO functions
+    //TODO db integration
     private int $idToken;
     private string $stringToken;
     private string $creationDate;
     private int $idUsr;
+
+    //functions
+    generateUniqueToken(){
+
+    }
     
     //db
     public function getVideoByIdVid(int $idVid): Array {   
@@ -91,13 +96,32 @@ class Video {
     } 
 
     //setter getter
-    function setIdToken($idToken) { $this->idToken = $idToken; }
-    function getIdToken() { return $this->idToken; }
-    function setStringToken($stringToken) { $this->stringToken = $stringToken; }
-    function getStringToken() { return $this->stringToken; }
-    function setCreationDate($creationDate) { $this->creationDate = $creationDate; }
-    function getCreationDate() { return $this->creationDate; }
-    function setIdUsr($idUsr) { $this->idUsr = $idUsr; }
-    function getIdUsr() { return $this->idUsr; }
+    function setIdToken(int $idToken): bool { 
+        $this->idToken = $idToken; 
+    }
+    function getIdToken(): int { 
+        return $this->idToken; 
+    }
+
+    function setStringToken(string $stringToken): bool { 
+        $this->stringToken = $stringToken; 
+    }
+    function getStringToken(): string { 
+        return $this->stringToken; 
+    }
+
+    function setCreationDate(string $creationDate): bool { 
+        $this->creationDate = $creationDate; 
+    }
+    function getCreationDate(): string { 
+        return $this->creationDate; 
+    }
+    
+    function setIdUsr(int $idUsr): bool { 
+        $this->idUsr = $idUsr; 
+    }
+    function getIdUsr(): int { 
+        return $this->idUsr; 
+    }
 }
 ?>

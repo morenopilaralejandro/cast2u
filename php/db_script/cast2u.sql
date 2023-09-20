@@ -21,7 +21,7 @@ create table usr (
 
 create table token (
 	id_token int not null auto_increment,
-	string_token varchar(255),
+	string_token varchar(255) unique,
     creation_date date,
 	id_usr int,
 	constraint pk_token primary key (id_token),
