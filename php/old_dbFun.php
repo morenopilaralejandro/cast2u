@@ -67,7 +67,6 @@ class DbFun {
         } 
     }  
 
-    //TODO
     public function updateVid($id_vid, $title, $img, $url, $idUsr, $bd) {
         $sql = "update video set title='".$title."', img='".$img."', url='".$url."'";
         $sql.= " where id_vid=".$id_vid." and id_usr=".$idUsr;
