@@ -120,25 +120,25 @@ insert into video values (
     1, 
     'https://www.youtube.com/embed/CrO7vBqZaFQ?list=PL4rzcHfrDGhn1lnyTrBQa_LaolhBaGiZB', 
     'https://m.media-amazon.com/images/M/MV5BMDVlZDhmNDktNTVkYy00MTdmLTk0ZjAtYmRkMTgwYzViZDBkXkEyXkFqcGdeQXVyMjU0ODQ5NTA@._V1_FMjpg_UX746_.jpg', 
-    'Kamen Rider Ryuki', '2021-12-20', false, 0, 1);
+    'Kamen Rider Ryuki', '2021-12-20', false, 0, 0, 1);
 
 insert into video values (
     2, 
     'http://185.53.89.183/hls/ssla.m3u8', 
     'https://i.pinimg.com/736x/09/15/03/0915032a2e8ff63bc374c84646fa9888.jpg',
-    'La Liga', SYSDATE(), false, 0, 1);
+    'La Liga', SYSDATE(), false, 0, 1, 1);
 
 insert into video values (
     3, 
     'http://192.168.1.18:1234/storage/emulated/0/Download/revice.mp4', 
     'https://m.media-amazon.com/images/M/MV5BMmQwZWU1YjgtYzUzNi00YzE0LThmMTEtMmJmMzE4MDg3NzQxXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-    'Kamen Rider Revice', SYSDATE(), false, 0, 1);
+    'Kamen Rider Revice', SYSDATE(), false, 0, 2, 1);
 
 insert into video values (
     4, 
     'http://vid.com?v=7777', 
     'https://m.media-amazon.com/images/M/MV5BMmQwZWU1YjgtYzUzNi00YzE0LThmMTEtMmJmMzE4MDg3NzQxXkEyXkFqcGdeQXVyMTEzMTI1Mjk3._V1_.jpg',
-    'Video4', SYSDATE(), false, 0, 2);
+    'Video4', SYSDATE(), false, 0, 0, 2);
 
 /* category */
 insert into category values (1, 'tokusatsu', 'tokusatsu');

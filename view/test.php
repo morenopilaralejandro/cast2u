@@ -1,8 +1,10 @@
 <?php 
 	session_start();
-	
-    include_once('../php/class/video.php');
-    include_once('../php/se_ck_manager.php');
+
+    require_once __DIR__ . '/../php/class/Video.php';
+    require_once __DIR__ . '/../php/class/Token.php';
+    require_once __DIR__ . '/../php/SeCkManager.php';
+    require_once __DIR__ . '/../php/WebComp.php';
 
     $manager = new SeCkManager();
 

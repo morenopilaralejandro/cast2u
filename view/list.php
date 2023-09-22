@@ -1,37 +1,38 @@
 <?php 
-	include_once "../php/funDb.php";
-	include_once "../php/bd.php";
-	include_once '../php/videoListItem.php'; 
-	include_once "../php/cookieManager.php";
-    include_once "../php/webComponents.php";
-    include_once "../php/userAgent.php";
-    include_once "../php/lang.php";
-    $lang=getLang();
-    switch ($lang) {
-        case "en":
-            include "../php/en.php";
-            break;
-        case "es":
-            include "../php/es.php";
-            break;
-        default:
-            include "../php/en.php";
-            break;
-    }	
-	$idUsr = null;
-	$idUsr=validateCookie($bd,0);
-	$result = getVidByUser($idUsr,$bd);
-    $agent= detectUserAgent();
+	session_start();
+    $_SESSION["seIdUsr"]=1;
+
+    require_once __DIR__ . '/../php/SeCkManager.php';
+    require_once __DIR__ . '/../php/WebComp.php';
+    require_once __DIR__ . '/../php/class/Video.php';
+    require_once __DIR__ . '/../php/class/Usr.php';
+    
+    $manager = new SeCkManager();
+    $webComp = new WebComp($manager->getCkLangCode());
+    include __DIR__ . $webComp->getLangFile();
+
+
+    if($manager->validateToken()) {
+        $agent = $manager->detectUserAgent();
+
+        $usrObj = Usr::factory();
+        $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
+
+        $videoObj = Video::Factory();
+        $videoArr = $videoObj->getVideoByIdUsr($usrObj->getIdUsr());
+    } else {
+		header('Location: ../index.php');
+    }
 ?>
 <!doctype html>
-<html lang="<?=$lang?>">
+<html lang="<?=$manager->getCkLangCode()?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title><?=$stTitle1?></title>
-	<meta name="description" content="<?=$stDescription?>">
-	<meta name="author" content="<?=$stAuthor?>">
+	<title><?=$strTitle1?></title>
+	<meta name="description" content="<?=$strDescription?>">
+	<meta name="author" content="<?=$strAuthor?>">
 
 	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
@@ -48,18 +49,18 @@
         if($agent=="wiiu"){
             echo "<header style='display: none;';>header</header>";
         }else{
-	        echo "<header>".getHeader(0)."</header>";
+	        echo "<header>{$webComp->getHeader(0)}</header>";
         }
     ?>
 	<div id="container">
 		<?php 
-            if(count($result)>0){
+            if(count($videoArr)>0){
 			    $j=1;
-			    foreach ($result as $i) {
+			    foreach ($videoArr as $i) {
 				    if($j%2!=0){
 					    echo "<div class='listContainer'>";
 				    }
-				    echo printListItem($i);
+				    echo $webComp->getListItem($i);
 				    if($j%2==0){
 					    echo "</div>";
 				    }
@@ -69,11 +70,11 @@
 				    echo "</div>";
 			    }
             }else{
-                echo printNoVideos();
+                echo $webComp->getNoVideos();
             }
 		?>
-		<a class="btnPrim btnGray" href="panel.php"><?=$stBtn1?></a>
+		<a class="btnPrim btnGray" href="panel.php"><?=$strBtn1?></a>
 	</div>
-	<footer><?=getFooter()?></footer>
+	<footer><?=$manager->getFooter()?></footer>
 </body>
 </html>
