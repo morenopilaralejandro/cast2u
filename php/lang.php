@@ -1,4 +1,5 @@
 <?php
+    //TODO merge ck se manager
     function getCkLang(){
         $lang = "en";
 	    

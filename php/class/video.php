@@ -100,15 +100,15 @@ class Video {
         string $title, string $uploadDate, bool $counterEnabled, 
         int $counterValue, int $orderValue, int $idUsr) {
         
-        $this->idVid=$idVid;
-        $this->url=$url;
-        $this->img=$img;
-        $this->title=$title;
-        $this->uploadDate=$uploadDate;
-        $this->counterEnabled=$counterEnabled;
-        $this->counterValue=$counterValue;
-        $this->orderValue=$orderValue;
-        $this->idUsr=$idUsr;
+        $this->idVid = $idVid;
+        $this->url = $url;
+        $this->img = $img;
+        $this->title = $title;
+        $this->uploadDate = $uploadDate;
+        $this->counterEnabled = $counterEnabled;
+        $this->counterValue = $counterValue;
+        $this->orderValue = $orderValue;
+        $this->idUsr = $idUsr;
     }
 
     //factory
@@ -289,7 +289,7 @@ class Video {
             return false;
         }
     }
-    public function getOrderValue): int { 
+    public function getOrderValue(): int { 
         return $this->orderValue; 
     }
 

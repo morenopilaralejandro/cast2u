@@ -124,10 +124,10 @@ class Token {
     public function __construct(int $idToken, string $stringToken, 
         string $creationDate, int $idUsr) {
         
-        $this->idToken=$idToken;
-        $this->stringToken=$stringToken;
-        $this->creationDate=$creationDate;
-        $this->idUsr=$idUsr;
+        $this->idToken = $idToken;
+        $this->stringToken = $stringToken;
+        $this->creationDate = $creationDate;
+        $this->idUsr = $idUsr;
     }
 
     //factory

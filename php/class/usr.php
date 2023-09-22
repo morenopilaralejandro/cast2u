@@ -66,10 +66,10 @@ class Usr {
     public function __construct(int $idUsr, string $usrName, 
         string $pwd, string $email) {
         
-        $this->idUsr=$idUsr;
-        $this->usrName=$usrName;
-        $this->pwd=$pwd;
-        $this->email=$email;
+        $this->idUsr = $idUsr;
+        $this->usrName = $usrName;
+        $this->pwd = $pwd;
+        $this->email = $email;
     }
 
     //factory

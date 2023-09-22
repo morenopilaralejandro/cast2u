@@ -45,7 +45,7 @@ function getFooter(){
     return $footer;
 }
 
-function printNoVideos(){
+function getNoVideos(){
     $lang=getLang();
     include $lang.".php";
     $content="";

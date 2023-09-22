@@ -1,6 +1,6 @@
 <?php 
-
-	function printListItem($video)
+    //TODO merge with web comp
+	function getListItem($video)
 	{
 		
 		$item = "
@@ -11,7 +11,7 @@
 		return $item;
 	}
 
-	function printPanelItem($video)
+	function getPanelItem($video)
 	{
 		
 		$item = "

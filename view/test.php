@@ -2,8 +2,12 @@
 	session_start();
 	
     include_once('../php/class/video.php');
-    $videoObj = Video::factory();
-    $videoObj = $videoObj->getVideoByIdUsr(1)[0];
+    include_once('../php/se_ck_manager.php');
+
+    $manager = new SeCkManager();
+
+    //$videoObj = Video::factory();
+    //$videoObj = $videoObj->getVideoByIdUsr(1)[0];
     //print_r($videoObj->getVideoByIdUsr(1));
     //print_r($videoObj->setTitle('xddddddddddddddddd'));
 	
