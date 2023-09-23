@@ -17,9 +17,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title><?=$stTitle2?></title>
-	<meta name="description" content="<?=$stDescription?>">
-	<meta name="author" content="<?=$stAuthor?>">
+	<title><?=$strTitle2?></title>
+	<meta name="description" content="<?=$strDescription?>">
+	<meta name="author" content="<?=$strAuthor?>">
 
 	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
@@ -50,7 +50,7 @@
 				?>
 				
 				<a class="btnPrim btnFloat btnGreen " href="edit.php">
-                    <img class="ico icoAdd" src="../img/add.png" alt="add">
+                    <img class="icoAdd" src="../img/add.png" alt="add">
                 </a>
 			</article>
 		</section>	

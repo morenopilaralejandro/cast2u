@@ -13,8 +13,6 @@
 
 
     if($manager->validateToken()) {
-        $agent = $manager->detectUserAgent();
-
         $usrObj = Usr::factory();
         $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
 
@@ -46,7 +44,7 @@
 <body>
 	<script src="../script/general.js"></script>
 	<?php
-        if($agent=="wiiu"){
+        if($manager->getAgent() == "wiiu") {
             echo "<header style='display: none;';>header</header>";
         }else{
 	        echo "<header>{$webComp->getHeader(0)}</header>";
@@ -54,20 +52,26 @@
     ?>
 	<div id="container">
 		<?php 
-            if(count($videoArr)>0){
+            if(count($videoArr) > 0) { 
 			    $j=1;
 			    foreach ($videoArr as $i) {
-				    if($j%2!=0){
+				    if($j%2 != 0) {
 					    echo "<div class='listContainer'>";
 				    }
-				    echo $webComp->getListItem($i);
-				    if($j%2==0){
+				    echo $webComp->getListItem($i, $manager->getAgent());
+				    if($j%2 == 0){
 					    echo "</div>";
+                        if($j<=2) {
+                            echo $webComp->getAd();
+                        }
 				    }
 				    $j++;
 			    }
-			    if($j%2==0){
+			    if($j%2 == 0 ) {
 				    echo "</div>";
+                    if($j<=2) {
+                        echo $webComp->getAd();
+                    }
 			    }
             }else{
                 echo $webComp->getNoVideos();
@@ -75,6 +79,6 @@
 		?>
 		<a class="btnPrim btnGray" href="panel.php"><?=$strBtn1?></a>
 	</div>
-	<footer><?=$manager->getFooter()?></footer>
+	<footer><?=$webComp->getFooter()?></footer>
 </body>
 </html>
