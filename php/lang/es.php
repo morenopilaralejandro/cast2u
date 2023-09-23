@@ -31,16 +31,23 @@
     $strBtn7="Crear cuenta";
     $strBtn8="Añadir vídeo";
 
+    $strPanel1="Modificado: ";
+
     $strEdit0="Gestionar vídeos";
-    $strEdit1="Título";
-    $strEdit2="URL de la carátula";
-    $strEdit3="URL del video";
+    $strEdit1="Título:";
+    $strEdit2="URL de la carátula:";
+    $strEdit3="URL del video:";
     $strEdit4="Borrar URL del vídeo";
     $strEdit5="Eliminar vídeo";
     $strEdit6="Eliminar";
     $strEdit7="Guardar";
     $strEdit8="Editar vídeo";
     $strEdit9="Crear vídeo";
+    $strEdit10="Habilitar contador";
+    $strEdit11="Valor del contador:";
+    $strEdit12="Puedes escribir <<counter>> en la URL del video y este se
+        sustituirá por el valor actual. Se incrementa automaticamente cuando
+        reproduces el video.";
 
     $strForm1="Nombre de usuario";
     $strForm2="Contraseña";

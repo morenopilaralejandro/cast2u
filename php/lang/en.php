@@ -31,16 +31,24 @@
     $strBtn7="Create an account";
     $strBtn8="Add video";
 
+    $strPanel1="Modified: ";
+
     $strEdit0="Manage videos";
-    $strEdit1="Title";
-    $strEdit2="Thumbnail URL";
-    $strEdit3="Video URL";
+    $strEdit1="Title:";
+    $strEdit2="Thumbnail URL:";
+    $strEdit3="Video URL:";
     $strEdit4="Clear Video URL";
     $strEdit5="Delete video";
     $strEdit6="Delete";
     $strEdit7="Save";
     $strEdit8="Edit video";
     $strEdit9="Create video";
+    $strEdit10="Enable counter";
+    $strEdit11="Counter value:";
+    $strEdit12="You can write <<counter>> in the video URL and it will be 
+        converted to the current value. 
+        It increments automaticly when you play the video";
+
 
     $strForm1="Username";
     $strForm2="Password";

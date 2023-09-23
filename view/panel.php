@@ -1,18 +1,28 @@
 <?php 
-	include_once "../php/funDb.php";
-	include_once "../php/bd.php";
-	include_once '../php/videoListItem.php'; 
-	include_once "../php/cookieManager.php";
-    include_once "../php/webComponents.php";
-    include_once "../php/lang.php";
-    $lang=getLang();
-    include "../php/".$lang.".php";
-	$idUsr = null;
-	$idUsr=validateCookie($bd,1);
-	$result = getVidByUser($idUsr,$bd);
+	session_start();
+
+    require_once __DIR__ . '/../php/SeCkManager.php';
+    require_once __DIR__ . '/../php/WebComp.php';
+    require_once __DIR__ . '/../php/class/Video.php';
+    require_once __DIR__ . '/../php/class/Usr.php';
+    
+    $manager = new SeCkManager();
+    $webComp = new WebComp($manager->getCkLangCode());
+    include __DIR__ . $webComp->getLangFile();
+
+
+    if($manager->validateToken()) {
+        $usrObj = Usr::factory();
+        $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
+
+        $videoObj = Video::Factory();
+        $videoArr = $videoObj->getVideoByIdUsr($usrObj->getIdUsr());
+    } else {
+		header('Location: ../index.php');
+    }
 ?>
 <!doctype html>
-<html lang="<?=$lang?>">
+<html lang="<?=$manager->getCkLangCode()?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,34 +43,36 @@
 <body>
     <script src="../script/general.js"></script>
 
-	<header><?=getHeader(0)?></header>
+	<header><?=$webComp->getHeader(0)?></header>
 	<div id="container">
 		<section>
-			<h1 class="secTitle"><?=$stEdit0?></h1>
+			<h1 class="secTitle"><?=$strEdit0?></h1>
 			<article class="contPanel" >
-                <h1 style="display: none;">h1</h1>
+                <h2 style="display: none;">h2</h2>
 				<?php 
-                    if(count($result)>0){
-                        foreach ($result as $i) {
-						    echo printPanelItem($i);
+                    if(count($videoArr)>0){
+			            $j=1;
+                        foreach ($videoArr as $i) {
+						    echo $webComp->getPanelItem($i, $j);
+				            $j++;
 					    }
                     }else{
-                        echo printNoVideos();
+                        echo $webComp->getNoVideos();
                     }
 				?>
-				
+				<br class="clear">
 				<a class="btnPrim btnFloat btnGreen " href="edit.php">
                     <img class="icoAdd" src="../img/add.png" alt="add">
                 </a>
 			</article>
 		</section>	
         <?php 
-        if(count($result)>0){
-            echo "<a class='btnPrim btnGray' href='list.php'>".$stBtn2."</a>";
+        if(count($videoArr)>0){
+            echo "<a class='btnPrim btnGray' href='list.php'>".$strBtn2."</a>";
         }
         ?>
 		
 	</div>
-	<footer><?=getFooter()?></footer>
+	<footer><?=$webComp->getFooter()?></footer>
 </body>
 </html>
