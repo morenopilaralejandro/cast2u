@@ -85,7 +85,7 @@ footer {
 }
 
 footer.bottomFooter {
-    position: absolute;
+    position: relative;
     width: 100%;
     box-sizing: border-box;
     bottom: 0px;
@@ -93,14 +93,14 @@ footer.bottomFooter {
 
 
 /*index--------------*/
-body.index div#container {
+body.index {
   
 }
 
-body.index div#container img {
+body.index img {
     position: absolute;
     width: 60%;
-    top: 100px;
+    top: 170px;
     right: 0px;
     left: 0px;
     z-index: -1000;
@@ -109,15 +109,21 @@ body.index div#container img {
 
 }
 
-body.index div#container div.titleDiv {
 
+body.index div.titleDiv, body.index div.btnDiv {
+    padding-left: 40px;
 }
 
-body.index div#container div.btnDiv {
-   
+body.index div.titleDiv {
+    text-shadow: 1px 1px black;
+    margin-top: 45px;
 }
 
-body.index div#container div.btnDiv a {
+body.index div.btnDiv {
+    margin-top: 250px;
+}
+
+body.index div.btnDiv a {
     float: left;
     margin-right: 5px;
 }
@@ -222,7 +228,7 @@ div.adMobileLeaderboard {
     margin: auto;
 }
 
-div.adMobileLeaderboard img{
+div.adMobileLeaderboard img {
     width: 100%;
     height: 100%;
 }
@@ -240,7 +246,7 @@ body.viewIframe {
 
 
 
-body.viewIframe video, body.viewIframe iframe{
+body.viewIframe video, body.viewIframe iframe {
 	width: 100%;
     height: 100%;
     margin: auto;
@@ -264,6 +270,7 @@ body.viewIframe video, body.viewIframe iframe{
 	text-align: center;
 	border: 2px solid white;
     font-weight: bold;
+    text-shadow: 1px 1px black;
 }
 
 .btnSecond {
@@ -278,33 +285,35 @@ body.viewIframe video, body.viewIframe iframe{
 	text-align: center;
 	border: 2px solid white;
     font-weight: bold;
+    text-shadow: 1px 1px black;
+    background-color: #252525;
 }
 
-.btnPrim.btnGray{
+.btnPrim.btnGray {
 	background-color: #b5b5b5;
     color: black;
 } 
 
-.btnPrim.btnBlue{
+.btnPrim.btnBlue {
 	background-color: #44acff;
 } 
 
-.btnPrim.btnGreen{
+.btnPrim.btnGreen {
 	background-color: #236626;
 } 
 
-.btnPrim.btnR{
+.btnPrim.btnR {
 	width:70px;
 	margin-right: 0px;
 } 
 
-.btnPrim.btnFix{
+.btnPrim.btnFix {
 	position: fixed;
     right: 20px;
     bottom: 0px;
 } 
 
-.btnFloat{
+.btnFloat {
 	position: fixed;
    	right: 30px;
     bottom: 25px;
@@ -367,7 +376,7 @@ div.videoPanelItemMain:hover {
 
 
 
-div.videoPanelItem img{
+div.videoPanelItem img {
 	width: 70px;
     height: 100%;
     box-sizing: border-box;
@@ -376,7 +385,7 @@ div.videoPanelItem img{
 
 
 
-div.videoPanelItem span{
+div.videoPanelItem span {
 	display: block;
     position: absolute;
     top: 15px;
@@ -386,7 +395,7 @@ div.videoPanelItem span{
 	overflow-x: hidden;
 }
 
-div.videoPanelItem span.spanUploadDate{
+div.videoPanelItem span.spanUploadDate {
     top: 40px;
     font-size: 14px;
     color: #e1e1e1;
@@ -448,19 +457,19 @@ div#formContainer {
 	margin: auto;
 }
 
-div#formContainer h3{
+div#formContainer h3 {
 	margin: 0px;
 	margin-bottom:10px;
 }
 
-div#formContainer textarea{
+div#formContainer textarea {
 	width: 90%;
     box-sizing: border-box;
     margin: 5px 0px;
     display: block;
 }
 
-div#formContainer button{
+div#formContainer button {
 	margin: 10px auto 5px auto;
     display: block;
 }
@@ -470,17 +479,17 @@ div#formContainer + div#formContainer {
 	margin-top:30px;
 }
 
-form#formEdit input[type=text], textarea{
+form#formEdit input[type=text], textarea {
 	width:100%;
 	box-sizing: border-box;
 	margin-bottom: 15px;
 }
 
-form#formEdit input[type=text]{
+form#formEdit input[type=text] {
 	
 }
 
-form#formEdit textarea{
+form#formEdit textarea {
 	resize: none;
 	height: 100px;
 }
@@ -491,7 +500,7 @@ label.deleteLabel {
     margin-top: 30px;
 }
 
-label.deleteLabel + a{
+label.deleteLabel + a {
 	display: none;
 }
 
@@ -499,7 +508,7 @@ img.icoAdd {
  width: 30px;
 }
 
-span.noVideos{
+span.noVideos {
     display: block;
     padding: 20px 0px 20px 0px;
     width: 100%;

@@ -13,11 +13,7 @@
     if($manager->validateToken()) {
         $usrObj = Usr::factory();
         $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
-
-        $videoObj = Video::Factory();
-        $videoArr = $videoObj->getVideoByIdUsr($usrObj->getIdUsr());
-    } else {
-		header('Location: ../index.php');
+        header('Location: ./view/list.php');
     }
 ?>
 <!doctype html>

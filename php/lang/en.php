@@ -16,7 +16,7 @@
     $strTitle5="Login - ".$strWebName;
     $strTitle6="Registrer - ".$strWebName;
     
-    $strIndex1="Castr videos to your console";
+    $strIndex1="Cast videos to your console";
     $strIndex2="Store video URL to watch them later";
 
     $strNav1="Settings";

@@ -1,5 +1,4 @@
 <?php 
-	include_once "../php/funDb.php";
     include_once "../php/cookieManager.php";
     include_once "../php/lang.php";
     include_once '../php/webComponents.php';
