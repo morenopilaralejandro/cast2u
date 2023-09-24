@@ -347,7 +347,7 @@ div.videoPanelItemMain {
 	display: block;
     background-color: #565656;
 	
-	width: 80%;
+	width: 88%;
 	height: 100%;
 
 
@@ -386,6 +386,12 @@ div.videoPanelItem span{
 	overflow-x: hidden;
 }
 
+div.videoPanelItem span.spanUploadDate{
+    top: 40px;
+    font-size: 14px;
+    color: #e1e1e1;
+}
+
 
 h1.secTitle {
     text-decoration: underline;
@@ -415,8 +421,8 @@ div.videoPanelItemSide a {
 div.videoPanelItemSide a img {
     position: absolute;
     display: block;
-	width: 70%;
-    height: 70%;
+	width: 60%;
+    height: 60%;
     right: 0px;
     left: 0px;
     margin: auto;

@@ -1,6 +1,5 @@
 <?php
 	session_start();
-    $_SESSION["seIdUsr"]=1;
 
     require_once __DIR__ . '/../php/SeCkManager.php';
     require_once __DIR__ . '/../php/WebComp.php';

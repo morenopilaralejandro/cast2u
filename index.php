@@ -1,18 +1,27 @@
 <?php 
-    include_once "php/lang.php";
-    include_once 'php/webComponents.php';
-    include_once 'php/userAgent.php';
-    $agent= detectUserAgent();
-    $lang=getLang();
-    include "php/".$lang.".php";
+	session_start();
+    require_once __DIR__ . '/php/SeCkManager.php';
+    require_once __DIR__ . '/php/WebComp.php';
+    require_once __DIR__ . '/php/class/Video.php';
+    require_once __DIR__ . '/php/class/Usr.php';
+    
+    $manager = new SeCkManager();
+    $webComp = new WebComp($manager->getCkLangCode());
+    include __DIR__ . "/php/lang/{$manager->getCkLangCode()}.php";
 
-    if (isset($_COOKIE['ckError'])) {
-        unset($_COOKIE['ckError']);
-        setcookie('ckError', null, -1, '/');
+
+    if($manager->validateToken()) {
+        $usrObj = Usr::factory();
+        $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
+
+        $videoObj = Video::Factory();
+        $videoArr = $videoObj->getVideoByIdUsr($usrObj->getIdUsr());
+    } else {
+		header('Location: ../index.php');
     }
 ?>
 <!doctype html>
-<html lang="<?=getLang()?>">
+<html lang="<?=$manager->getCkLangCode()?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +40,7 @@
 </head>
 
 <body class="index">
-	<header><?=getHeader(1)?></header>
+	<header><?=$webComp->getHeader(1)?></header>
 	
 	<div id="container">
         <img src="img/indexPic1.png" alt="cover">
@@ -47,13 +56,12 @@
 	</div>
 	
     <?php 
-    if($agent=="wiiu"){
+    if($manager->getAgent()=="wiiu"){
         echo "<footer style='visibility: hidden;'>&nbsp;</footer>"; 
     }else{
-        echo "<footer class='bottomFooter'>".getFooter()."</footer>";    
+        echo "<footer class='bottomFooter'>".$webComp->getFooter()."</footer>";    
     }
     ?>
-    
 	
 </body>
 </html>

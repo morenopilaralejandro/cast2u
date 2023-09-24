@@ -53,7 +53,7 @@
                     if(count($videoArr)>0){
 			            $j=1;
                         foreach ($videoArr as $i) {
-						    echo $webComp->getPanelItem($i, $j);
+						    echo $webComp->getPanelItem($i, $j, count($videoArr));
 				            $j++;
 					    }
                     }else{
