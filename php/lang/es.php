@@ -54,13 +54,15 @@
     $strForm3="Repetir contraseña";
     $strForm4="Entrar";
     $strForm5="Registrar";
+    $strForm6="Correo electrónico:";
 
 
 
     $strError1="No tienes vídeos guardados";
-    $strError2="Usuario o contraseña inválidos";
+    $strError2="Correo o contraseña no válidos";
     $strError3="Las contraseñas no coinciden";
     $strError4="Ya existe ese usuario";
+    $strError5="Ya esta registrado el correo";
 
     $strConf1="Cuenta eliminada";
 

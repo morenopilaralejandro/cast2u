@@ -15,7 +15,7 @@ create table usr (
 	id_usr int not null auto_increment,
 	usr_name varchar(32) not null unique,
 	pwd varchar(32),
-	email varchar(120),
+	email varchar(120) unique,
 	constraint pk_usr primary key (id_usr)
 );
 
@@ -112,7 +112,7 @@ delete from video;
 delete from usr;
 
 /* insert records */
-/* usr */
+/* usr pass -> admin1*/
 insert into usr values (1, 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 'aaaaaa@gmail.com');
 insert into usr values (2, 'user2', 'clave2', 'eeeeeeeee@hotmail.com');
 /* video */

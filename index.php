@@ -45,8 +45,8 @@
             <h4><?=$strIndex2?></h4>
         </div>
         <div class="btnDiv">
-            <a class="btnPrim btnBlue" href="html/login.php"><?=$strBtn5?></a>
-            <a class="btnSecond" href="html/register.php"><?=$strBtn7?></a>
+            <a class="btnPrim btnBlue" href="view/login.php"><?=$strBtn5?></a>
+            <a class="btnSecond" href="view/register.php"><?=$strBtn7?></a>
             <br class="clear">
         </div>
 	</div>

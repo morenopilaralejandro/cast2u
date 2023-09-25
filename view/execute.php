@@ -1,50 +1,108 @@
 <?php
-	include_once "../php/funDb.php";
-	include_once '../php/bd.php'; 
-	include_once "../php/cookieManager.php";
-    include_once "../php/lang.php";
-    $lang=getLang();
-    include "../php/".$lang.".php";
+	session_start();
+    require_once __DIR__ . '/../php/SeCkManager.php';
+    require_once __DIR__ . '/../php/WebComp.php';
+    require_once __DIR__ . '/../php/class/Video.php';
+    require_once __DIR__ . '/../php/class/Usr.php';
+    require_once __DIR__ . '/../php/class/Token.php';
 
-	$queryType = $_POST["queryType"];
-	if(isset($queryType)){
+    $manager = new SeCkManager();
+    $webComp = new WebComp($manager->getCkLangCode());
+    include __DIR__ . $webComp->getLangFile();
+    $usrObj = Usr::factory();
+    $videoObj = Video::factory();
+    $tokenObj = Token::factory();
+	
+	if(isset($_POST["queryType"])){
+        $queryType = $_POST["queryType"];
 		switch ($queryType) {
 			case "insert_user":
-				$username = $_POST["username"];
-				$passEnc = $_POST["passEnc"];
-				if(strlen($passEnc)==32 && strlen($username)>0){
-					$result = null;
-                    $sql = insertUsr($username, $passEnc, $bd);
-					if($sql==0){ 
-                        $result = getUsrByName($username, $bd);
-                        $_SESSION["seIdUsr"]=$result[0]->id_usr;
-                        $sql = generateToken(0, $bd);
-						header('Location: panel.php');
-					} else{ 
-						header('Location: register.php');
-                        setError($stError4);
-					} 
-				}
+                $email = $_POST["email"];
+                $usrName = $_POST["username"];
+				$pass = $_POST["pass"];
+                $passEnc = md5($_POST["pass"]);
+				$pass2 = $_POST["pass2"];
+                if(strlen($usrName) < 32 && strlen($pass) < 32 
+                        && strlen($pass2) < 32  && strlen($email) < 120) {
+				    if(strlen($pass) > 4) {
+                        if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                            if($pass == $pass2) {
+                                $usrArr1 = $usrObj->getUsrByName($usrName);
+                                $usrArr2 = $usrObj->getUsrByEmail($email);
+                                if(count($usrArr1) == 0) {
+                                    if(count($usrArr2) == 0) {
+                                        $usrObj->insert(0, $usrName, $passEnc, $email);
+                                        $usrObj = $usrObj->getUsrByEmail($email)[0];
+                                        $idUsr = $usrObj->getIdUsr();                
+                                        
+                                        $tokenString = $tokenObj->generateUniqueToken();
+                                        $tokenObj->insert(0, $tokenString, '', $idUsr);
+                                        
+                                        $manager->setSeIdUsr($idUsr);
+                                        $manager->setCkTokenUsr($tokenString);
+                                        header('Location: panel.php');
+                                    } else {
+                                        $manager->setCkError($strError5);
+                                        header('Location: register.php');
+                                    } 
+                                } else {
+                                    $manager->setCkError($strError4);
+                                    header('Location: register.php');
+                                }    
+                            } else {
+                                $manager->setCkError($strError3);
+                                header('Location: register.php');
+                            }
+                        } else {
+                            $manager->setCkError($strError2);
+                            header('Location: register.php');
+                        }
+				    } else {
+                        $manager->setCkError($strError2);
+                        header('Location: register.php');
+                    }
+                } else {
+                    $manager->setCkError($strError2);
+                    header('Location: register.php');
+                }
 				break;
 			case "login_user":
-				$username = $_POST["username"];
-				$passEnc = $_POST["passEnc"];
-				if(strlen($passEnc)==32 && strlen($username)>0){
-					$result = getUsrByName($username, $bd);
-					if(count($result)>0){
-						if($result[0]->pwd == $passEnc){
-                            $_SESSION["seIdUsr"]=$result[0]->id_usr;
-							storeDbToken($bd);
-							header('Location: list.php');
-						}else{
-							header('Location: login.php');
-                            setError($stError2);
-						}
-					}else{
-						header('Location: login.php');
-                        setError($stError2);
-					}	
-				}
+                $email = $_POST["email"];
+				$pass = $_POST["pass"];
+                $passEnc = md5($_POST["pass"]);
+                if(strlen($pass) < 32 && strlen($email) < 120) {
+				    if(strlen($pass) > 4) {
+                        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					        $usrArr = $usrObj->getUsrByEmail($email);
+					        if(count($usrArr) > 0){
+                                $usrObj = $usrArr[0];
+						        if($usrObj->getPwd() == $passEnc){
+                                    $manager->setSeIdUsr($usrObj->getIdUsr());
+                                    $idUsr = $usrObj->getIdUsr();
+                                    $tokenObj =  $tokenObj->getTokenByIdUsr($idUsr)[0];
+                                    $tokenString = $tokenObj->getStringToken();
+                                    $manager->setCkTokenUsr($tokenString);
+							        header('Location: list.php');
+						        } else {
+                                    $manager->setCkError($strError2);
+                                    header('Location: login.php');
+                                }
+					        } else {
+                                $manager->setCkError($strError2);
+                                header('Location: login.php');
+                            }	
+                        } else {
+                            $manager->setCkError($strError2);
+                            header('Location: login.php');
+                        }
+				    } else {
+                        $manager->setCkError($strError2);
+                        header('Location: login.php');
+                    }
+                } else {
+                    $manager->setCkError($strError2);
+                    header('Location: login.php');
+                }
 				break;
 			case "update_vid":
 				$idUsr=validateCookie($bd,0);
@@ -87,29 +145,3 @@
 		header('Location: ../index.php');
 	}
 ?>
-<!doctype html>
-<html lang="<?=$lang?>">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title><?=$stTitle00?></title>
-	<meta name="description" content="<?=$stDescription?>">
-	<meta name="author" content="<?=$stAuthor?>">
-
-	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-	<link rel="manifest" href="../favicon/site.webmanifest">
-
-
-</head>
-
-<body>
-    <header style="visibility:hidden;">&nbsp;</header>
-    <footer style="visibility:hidden;">&nbsp;</footer>	
-</body>
-</html>
-
-
-

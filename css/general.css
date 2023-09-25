@@ -528,6 +528,7 @@ form.formBasic {
 
 form.formBasic input[type=text],
 form.formBasic input[type=password],
+form.formBasic input[type=email],
 form.formBasic label { 
     display: block;
     margin-bottom: 15px;
@@ -535,7 +536,8 @@ form.formBasic label {
 }
 
 form.formBasic input[type=text],
-form.formBasic input[type=password] { 
+form.formBasic input[type=password],
+form.formBasic input[type=email] { 
     width: 100%;
     padding: 4px;
 }

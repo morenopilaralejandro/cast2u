@@ -50,18 +50,20 @@
         It increments automaticly when you play the video";
 
 
-    $strForm1="Username";
-    $strForm2="Password";
+    $strForm1="Username:";
+    $strForm2="Password:";
     $strForm3="Repeat password";
     $strForm4="Login";
     $strForm5="Register";
+    $strForm6="Email:";
 
 
 
     $strError1="You don't have any videos";
-    $strError2="Invalid username or password";
+    $strError2="Invalid email or password";
     $strError3="Passwords do not match";
     $strError4="Username already exits";
+    $strError5="Email already registered";
 
     $strConf1="Account deleted";
 
