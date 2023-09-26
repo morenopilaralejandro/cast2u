@@ -30,6 +30,7 @@
     $strBtn6="Continuar";
     $strBtn7="Crear cuenta";
     $strBtn8="Añadir vídeo";
+    $strBtn9="Volver";
 
     $strPanel1="Modificado: ";
 
@@ -64,7 +65,8 @@
     $strError4="Ya existe ese usuario";
     $strError5="Ya esta registrado el correo";
 
-    $strConf1="Cuenta eliminada";
+    $strConf1="¿Seguro que quieres eliminar tu cuenta?";
+    $strConf2="Cuenta eliminada";
 
     $strSettins1="Nombre de usuario";
     $strSettins2="Idioma";

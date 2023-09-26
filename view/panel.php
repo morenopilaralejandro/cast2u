@@ -68,7 +68,7 @@
 		</section>	
         <?php 
         if(count($videoArr)>0){
-            echo "<a class='btnPrim btnGray' href='list.php'>".$strBtn2."</a>";
+            echo "<a class='btnPrim btnSecond' href='list.php'>".$strBtn2."</a>";
         }
         ?>
 		

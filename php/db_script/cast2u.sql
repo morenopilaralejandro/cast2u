@@ -109,12 +109,18 @@ delete from country;
 delete from vidcat;
 delete from category;
 delete from video;
+delete from token;
 delete from usr;
 
 /* insert records */
 /* usr pass -> admin1*/
 insert into usr values (1, 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 'aaaaaa@gmail.com');
 insert into usr values (2, 'user2', 'clave2', 'eeeeeeeee@hotmail.com');
+
+/* token */
+insert into token values (1, '742c3acea37da48fd6d0f07958ba68e8', now(), 1);
+insert into token values (1, '642c3acea37da48fd6d0f07958ba68e9', now(), 1);
+
 /* video */
 insert into video values (
     1, 

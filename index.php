@@ -39,18 +39,33 @@
 	<header><?=$webComp->getHeader(1)?></header>
 	
 	<div id="container">
-        <img src="img/indexPic1.png" alt="cover">
+        <img class="indexCover" src="img/indexPic1.png" alt="cover">
         <div class="titleDiv">
             <h1><?=$strIndex1?></h1>
             <h4><?=$strIndex2?></h4>
         </div>
         <div class="btnDiv">
             <a class="btnPrim btnBlue" href="view/login.php"><?=$strBtn5?></a>
-            <a class="btnSecond" href="view/register.php"><?=$strBtn7?></a>
+            <a class="btnPrim btnSecond" href="view/register.php"><?=$strBtn7?></a>
             <br class="clear">
         </div>
+        <div class="validCss">
+            <p>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px"
+                        src="http://jigsaw.w3.org/css-validator/images/vcss"
+                        alt="Valid CSS!" >
+                </a>
+            </p>
+            <p>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px"
+                    src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                    alt="Valid CSS!" >
+                </a>
+            </p>   
+        </div>
 	</div>
-	
     <?php 
     if($manager->getAgent()=="wiiu"){
         echo "<footer style='visibility: hidden;'>&nbsp;</footer>"; 

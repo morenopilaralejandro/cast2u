@@ -75,7 +75,7 @@
                 echo $webComp->getNoVideos();
             }
 		?>
-		<a class="btnPrim btnGray" href="panel.php"><?=$strBtn1?></a>
+		<a class="btnPrim btnSecond" href="panel.php"><?=$strBtn1?></a>
 	</div>
 	<footer><?=$webComp->getFooter()?></footer>
 </body>

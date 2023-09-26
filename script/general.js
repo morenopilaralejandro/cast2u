@@ -11,3 +11,8 @@ function showNav(){
         nav.className="hideNav";
     }
 }
+
+function hideNav(){
+    var nav = document.getElementById("headerNav");
+    nav.className="hideNav";
+}

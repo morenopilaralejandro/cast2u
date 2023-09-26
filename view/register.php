@@ -20,7 +20,7 @@
     }
 ?>
 <!doctype html>
-<html lang="<?=$lang?>">
+<html lang="<?=$manager->getCkLangCode()?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,22 +48,21 @@
             action="execute.php" method="post" enctype="multipart/form-data">
 
             <label for="email"><?=$strForm6?></label>
-			<input id="email" name="email" type="email" maxlength="120" />
+			<input id="email" name="email" type="email" maxlength="120">
 
             <label for="username"><?=$strForm1?></label>
-			<input id="username" name="username" type="text" maxlength="32" />
+			<input id="username" name="username" type="text" maxlength="32">
 
             <label for="pass"><?=$strForm2?></label>
-			<input id="pass" name="pass" type="password" maxlength="32" minlength="4"/>
+			<input id="pass" name="pass" type="password" maxlength="32" minlength="4">
 
             <label for="pass2"><?=$strForm3?></label>
-			<input id="pass2" name="pass2" type="password" maxlength="32" minlength="4"/>
+			<input id="pass2" name="pass2" type="password" maxlength="32" minlength="4">
 
-			<input id="queryType" name="queryType" type="hidden" value="insert_user" />
+			<input id="queryType" name="queryType" type="hidden" value="insert_user">
 
             <span id="errorSpan"><?=$errorMsg?></span>
-			<input type="submit" class="btnPrim btnGreen" 
-                onclick="validateRegisterForm()" value="<?=$strForm5?>"/>
+			<input type="submit" class="btnPrim btnGreen" value="<?=$strForm5?>">
 		</form>
 		
 	</div>

@@ -128,15 +128,31 @@
 				header('Location: panel.php');
 				break;
 			case "save_settings":
-                setLang();
-				header('Location: panel.php');            
+                if($manager->validateToken()) {
+                    $manager->setCkLangCode($_POST["selectLang"]);
+				    header('Location: panel.php');   
+                } else {
+                    header('Location: ../index.php');
+                }
 				break;
 			case "delete_user":
-                $idUsr=validateCookie($bd,0);
-                $result = deleteUsr($idUsr, $bd);
-                logOut();
-                $_SESSION["sesConfMsg"]= $stConf1;
-                header('Location: confirm.php');
+                if($manager->validateToken()) {
+                    $idUsr = $manager->getSeIdUsr();
+                    
+                    $videoObj = $videoObj->getVideoByIdUsr($idUsr);
+                    foreach($videoObj as $i) {
+                        $i->delete();
+                    } 
+
+                    $tokenObj = $tokenObj->getTokenByIdUsr($idUsr)[0];
+                    $tokenObj->delete();
+
+                    $usrObj = $usrObj->getUsrByIdUsr($idUsr)[0];
+                    $usrObj->delete(); 
+ 
+                    $manager->logOut();
+                }
+                header('Location: ../index.php');
 				break;
 			default:
        			header('Location: ../index.php');

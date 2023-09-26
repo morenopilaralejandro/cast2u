@@ -30,6 +30,7 @@
     $strBtn6="Continue";
     $strBtn7="Create an account";
     $strBtn8="Add video";
+    $strBtn9="Go back";
 
     $strPanel1="Modified: ";
 
@@ -65,7 +66,8 @@
     $strError4="Username already exits";
     $strError5="Email already registered";
 
-    $strConf1="Account deleted";
+    $strConf1="Are you sure you want to delete your account?";
+    $strConf2="Account deleted";
 
     $strSettins1="Username";
     $strSettins2="Language";
