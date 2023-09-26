@@ -41,7 +41,7 @@
 <body>
 	<script src="../script/general.js"></script>
 	
-	<header><?=$webComp->getHeader(0)?></header>
+	<header><?=$webComp->getHeader(2, false)?></header>
 	
 	<div id="container">
 		<form name="formRegister" id="formRegister" class="formBasic" 

@@ -40,7 +40,7 @@
 <body>
 	<script src="../script/general.js"></script>
 	
-	<header><?=$webComp->getHeader(0)?></header>
+	<header><?=$webComp->getHeader(0, true)?></header>
 	
 	<div id="container">
 		<section>

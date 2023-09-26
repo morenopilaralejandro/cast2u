@@ -36,7 +36,7 @@
 </head>
 
 <body class="index">
-	<header><?=$webComp->getHeader(1)?></header>
+	<header><?=$webComp->getHeader(1, false)?></header>
 	
 	<div id="container">
         <img class="indexCover" src="img/indexPic1.png" alt="cover">

@@ -45,7 +45,7 @@
         if($manager->getAgent() == "wiiu") {
             echo "<header style='display: none;';>header</header>";
         }else{
-	        echo "<header>{$webComp->getHeader(0)}</header>";
+	        echo "<header>{$webComp->getHeader(0, true)}</header>";
         }
     ?>
 	<div id="container">
