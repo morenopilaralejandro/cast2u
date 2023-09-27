@@ -46,9 +46,9 @@
     $strEdit9="Create video";
     $strEdit10="Enable counter";
     $strEdit11="Counter value:";
-    $strEdit12="You can write <<counter>> in the video URL and it will be 
-        converted to the current value. 
-        It increments automaticly when you play the video";
+    $strEdit12="You can write &lt;&lt;counter&gt;&gt; in the video URL and it 
+        will be converted to the current value. It increments automaticly when 
+        you play the video.";
 
 
     $strForm1="Username:";

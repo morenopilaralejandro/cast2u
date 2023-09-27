@@ -18,7 +18,6 @@ create table usr (
 	email varchar(120) unique,
 	constraint pk_usr primary key (id_usr)
 );
-
 create table token (
 	id_token int not null auto_increment,
 	string_token varchar(255) unique,
@@ -28,14 +27,13 @@ create table token (
 	constraint fk_token_usr foreign key (id_usr) 
         references usr(id_usr) on delete cascade
 );
-
 create table video(
 	id_vid int not null auto_increment, 
 	url varchar(2000), 
 	img varchar(2000), 
 	title varchar(32), 
 	upload_date date,
-    counter_enabled boolean,
+    counter_enabled bool,
     counter_value int(4),
     order_value int,     
 	id_usr int,

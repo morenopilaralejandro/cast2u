@@ -46,9 +46,9 @@
     $strEdit9="Crear vídeo";
     $strEdit10="Habilitar contador";
     $strEdit11="Valor del contador:";
-    $strEdit12="Puedes escribir <<counter>> en la URL del video y este se
-        sustituirá por el valor actual. Se incrementa automaticamente cuando
-        reproduces el video.";
+    $strEdit12="Puedes escribir &lt;&lt;counter&gt;&gt; en la URL del video y 
+        este se sustituirá por el valor actual. Se incrementa automaticamente 
+        cuando reproduces el video.";
 
     $strForm1="Nombre de usuario";
     $strForm2="Contraseña";

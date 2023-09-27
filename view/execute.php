@@ -105,21 +105,59 @@
                 }
 				break;
 			case "update_vid":
-				$idUsr=validateCookie($bd,0);
-				$id_vid = $_POST["id_vid"];
-				$url = $_POST["url"];
-				$img = $_POST["img"];
-				$title = $_POST["title"];
-				$result = updateVid($id_vid, $title, $img, $url, $idUsr, $bd);
-				header('Location: panel.php');
-				break;
 			case "insert_vid":
-				$idUsr=validateCookie($bd,0);
-				$url = $_POST["url"];
-				$img = $_POST["img"];
-				$title = $_POST["title"];
-				$result = insertVid($url, $img,$title, $idUsr, $bd);
-				header('Location: panel.php');
+                if($manager->validateToken()) {
+                    $idVid = $_POST['id_vid'];
+                    $title = $_POST['title'];
+                    $img = $_POST['img'];
+                    $url = $_POST['url'];
+                    $counterEnabled = $_POST['ck_counter'] ?? false;
+                    $counterValue = $_POST['value_counter'] ?? 0;
+                    $orderValue = 0;
+
+                    if(empty($img)) {
+                        $img = "../img/def_thumb.jpg";
+                    }
+                    
+                    if(strlen($title) < 32 &&
+                        strlen($img) < 2000 &&
+                        strlen($url) < 2000 &&
+                        $counterValue < 1000) {
+
+                        if($queryType == "insert_vid") {
+                            $idUsr = $manager->getSeIdUsr();
+                            $videoArr = $videoObj->getVideoByIdUsr($idUsr);
+                            $orderValue = count($videoArr);
+
+                            $videoObj->insert(0, $url, $img, $title, '', 
+                                $counterEnabled, $counterValue, 
+                                $orderValue, $idUsr);
+                            header('Location: panel.php');
+                        } else {
+                            if($queryType == "update_vid") {
+                                if($manager->validateIdVid($idVid)){
+                                    $videoObj = $videoObj->getVideoByIdVid($idVid)[0];
+                                    $videoObj->setTitle($title);
+                                    $videoObj->setImg($img);
+                                    $videoObj->setUrl($url);
+                                    $videoObj->setUploadDate(date("Y-m-d"));        
+                                    $videoObj->setCounterEnabled($counterEnabled);
+                                    $videoObj->setCounterValue($counterValue);
+                                    header('Location: panel.php');
+                                } else {
+                                    header('Location: panel.php');
+                                }
+
+                            } else {
+                                header('Location: panel.php');
+                            }
+                        }
+                    } else {
+                        header('Location: panel.php');
+                    }
+                } else {
+                    header('Location: ../index.php');
+                }
 				break;
 			case "del_vid":
 				$idUsr=validateCookie($bd,0);

@@ -15,24 +15,38 @@
         $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
 
         $queryType = "insert_vid";
-        $edit = false;
+        $isEdit = false;
+        $pageTitle = "";
+
         $idVid = "";
         $url = "";
         $img = "";
         $title = "";
-	    if(isset($_GET['vid'])) {
-            $idVid = $_GET['vid'];
+        $counterEnabled = false;
+        $counterValue = 0;
+	    if(isset($_GET['v'])) {
+            $idVid = $_GET['v'];
             if($manager->validateIdVid($idVid)) {
                 $videoObj = Video::Factory();
                 $videoObj = $videoObj->getVideoByIdVid($idVid)[0];
 
-		        $edit = true;
+		        $isEdit = true;
 		        $queryType = "update_vid";
 		        $url = $videoObj->getUrl();
 		        $img = $videoObj->getImg();
 		        $title = $videoObj->getTitle();
+                $counterEnabled = $videoObj->getCounterEnabled();
+                $counterValue = $videoObj->getCounterValue();
+                if($img == "../img/def_thumb.jpg") {
+                    $img = "";
+                }
             }
 	    }
+        if($isEdit){
+            $pageTitle = $strEdit8;
+        }else{
+            $pageTitle = $strEdit9;
+        }
     } else {
 		header('Location: ../index.php');
     }
@@ -82,6 +96,12 @@
 			frm.queryType.value = "del_vid";
 			validateEditForm();
 		}
+
+
+
+
+
+
 		
 		function ckDelete() {
 			var ckDel = document.getElementById("ckDel");
@@ -98,64 +118,83 @@
 		
 	</script>
 	
-	
 	<header><?=$webComp->getHeader(0, true)?></header>
-	
 	
 	<div id="container">
 		<section>
-			<h1 class="secTitle">
-				<?php
-					if($edit){
-						echo $stEdit8;
-					}else{
-						echo $stEdit9;
-					}
-				?>
-				
-			</h1>
-			<article class="contPanel" >
-                <h1 style="display: none;">h1</h1>
-				<form name="formEdit" id="formEdit" action="execute.php" method="post" 
-                    enctype="multipart/form-data">
+			<h1 class="secTitle"><?=$pageTitle?></h1>
+			<article class="contPanel">
+                <h2 style="display: none;">h2</h2>
+				<form name="formEdit" id="formEdit" action="execute.php" 
+                    method="post" enctype="multipart/form-data">
+                    
+                    <input id="queryType" name="queryType" type="hidden" 
+                        value="<?=$queryType?>">     
+                    
+					<input id="id_vid" name="id_vid" type="hidden" 
+                        value="<?=$idVid?>">
+             
+                    <label class="labelInline">
+                        <?=$strEdit1?>
+                        <input id="title" name="title" type="text" maxlength="32" 
+                            value="<?=$title?>">
+                    </label>
+                 
+                    <label>
+                        <?=$strEdit2?>
+					    <textarea id="img" maxlength="2000" 
+                            name="img"><?=$img?></textarea>            
+                    </label>
 
-					<input id="title" name="title" type="text" 
-                        maxlength="32" placeholder="<?=$stEdit1?>" value="<?=$title?>"/>
+                    <label>
+                        <?=$strEdit3?>
+					    <textarea id="url" maxlength="2000" 
+                            name="url"><?=$url?></textarea>          
+                    </label>
 
-					<textarea placeholder="<?=$stEdit2?>" 
-                        id="img" name="img"><?=$img?></textarea>
+					<input type="button" value="<?=$strEdit4?>" 
+                        onclick="clearInput('url')">
 
-					<textarea placeholder="<?=$stEdit3?>" 
-                        id="url" name="url" ><?=$url?></textarea>
+                    <label class="labelInline"><input type='checkbox' 
+                        id='ck_counter' name="ck_counter"
+                        <?php
+                            if($counterEnabled) {
+                                echo "checked";
+                            }
+                        ?>
+                    ><?=$strEdit10?>
+                        <span class="tooltip">
+                            <img src="../img/info.png" alt="tooltip">
+                            <span><?=$strEdit12?></span>
+                        </span>
+                    </label>
+            
+                    <label class="labelInline"><?=$strEdit11?>
+                        <input type="number" id="value_counter" name="value_counter"
+                            min="-9999" max="9999"
+                            value="<?=$counterValue?>">
+                    </label>
 
-					<input id="id_vid" name="id_vid" type="hidden" value="<?=$id_vid?>" />
-					<input id="queryType" name="queryType" type="hidden" value="<?=$queryType?>" />
-					<input type="button" value="<?=$stEdit4?>" onclick="clearInput('url')">
 					<?php
 						if($isEdit){
 							echo "<label class='deleteLabel' >";
-                            echo "<input type='checkbox' id='ckDel' onclick='ckDelete()'/>";
-                            echo $stEdit5;
+                                echo "<input type='checkbox' id='ckDel' 
+                                    onclick='ckDelete()'>";
+                                echo $strEdit5;
                             echo "</label>";
-							echo "<a style='margin-left:0px;' class='btnPrim' id='btnDel' onclick='deleteVid()' href='#'>";
-                            echo $stEdit6;
+							echo "<a style='margin-left:0px;' class='btnPrim' 
+                                id='btnDel' href='delvid.php?v={$idVid}'>";
+                                echo $strEdit6;
                             echo "</a>";
 						}
 					?>
 
-					<input style="display: none;" type="submit" onclick="validateEditForm()" 
-                        value="<?=$stEdit7?>"/>
-					<a class="btnPrim btnBlue btnR" id="btnSave" onclick="validateEditForm()" 
-                        href="#"><?=$stEdit7?></a>
+					<input type="submit" class="btnPrim btnBlue btnR" 
+                        id="btnSave" value="<?=$strEdit7?>">
 				</form>
 			</article>
 		</section>
 	</div>
-	
-	<footer><?=$webComp->getFooter()?>></footer>
-	
-	<script>
-		ckImg();
-	</script>
+	<footer><?=$webComp->getFooter()?></footer>
 </body>
 </html>
