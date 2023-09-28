@@ -17,7 +17,14 @@
                 $agent = $manager->getAgent();
                 $videoObj = Video::Factory();
                 $videoObj = $videoObj->getVideoByIdVid($idVid)[0];
-                header("Location: {$videoObj->getUrl()}");
+                $url = $videoObj->getUrl();
+                $counterEnabled = $videoObj->getCounterEnabled();
+                $counterValue = $videoObj->getCounterValue();
+                if($counterEnabled) {
+                    $url = str_replace("<<counter>>", $counterValue, $url);
+                    $videoObj->setCounterValue($counterValue+1);
+                }
+                header("Location: {$url}");
             }else {
                 header('Location: list.php');
             }

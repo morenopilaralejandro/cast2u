@@ -159,18 +159,12 @@
                     header('Location: ../index.php');
                 }
 				break;
-			case "del_vid":
-				$idUsr=validateCookie($bd,0);
-				$id_vid = $_POST["id_vid"];
-				$result = deleteVid($id_vid, $idUsr, $bd);
-				header('Location: panel.php');
-				break;
 			case "save_settings":
                 if($manager->validateToken()) {
                     $manager->setCkLangCode($_POST["selectLang"]);
 				    header('Location: panel.php');   
                 } else {
-                    header('Location: ../index.php');
+                    header('Location: panel.php');
                 }
 				break;
 			case "delete_user":
