@@ -6,4 +6,4 @@ Live: [cast2u.epizy.com](http://cast2u.epizy.com/)
 - Added functionality to change video order.
 - Added functionality to auto increment episode counter.
 ## Screenshots
-![Index](img/github_img/index.php)
+![Index](https://github.com/morenopilaralejandro/cast2u/blob/master/index.png?raw=true)
