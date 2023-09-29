@@ -7,3 +7,7 @@ Live: [cast2u.epizy.com](http://cast2u.epizy.com/)
 - Added functionality to auto increment episode counter.
 ## Screenshots
 ![index](https://github.com/morenopilaralejandro/cast2u/blob/master/img/github_img/index.png?raw=true)
+![index](https://github.com/morenopilaralejandro/cast2u/blob/master/img/github_img/list.png?raw=true)
+![index](https://github.com/morenopilaralejandro/cast2u/blob/master/img/github_img/panel.png?raw=true)
+![index](https://github.com/morenopilaralejandro/cast2u/blob/master/img/github_img/edit.png?raw=true)
+![index](https://github.com/morenopilaralejandro/cast2u/blob/master/img/github_img/gamepad.jpg?raw=true)
