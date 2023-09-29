@@ -76,9 +76,9 @@
 					        $usrArr = $usrObj->getUsrByEmail($email);
 					        if(count($usrArr) > 0){
                                 $usrObj = $usrArr[0];
-						        if($usrObj->getPwd() == $passEnc){
-                                    $manager->setSeIdUsr($usrObj->getIdUsr());
+						        if($usrObj->getPwd() == $passEnc) {
                                     $idUsr = $usrObj->getIdUsr();
+                                    $manager->setSeIdUsr($idUsr);
                                     $tokenObj =  $tokenObj->getTokenByIdUsr($idUsr)[0];
                                     $tokenString = $tokenObj->getStringToken();
                                     $manager->setCkTokenUsr($tokenString);

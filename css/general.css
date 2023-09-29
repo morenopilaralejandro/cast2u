@@ -150,6 +150,7 @@ div#container {
 div.listContainer {
 	margin:auto;
 	text-align: center;
+    position: relative;
 }
 
 div.videoListItem {
@@ -192,6 +193,8 @@ div.videoListItem span {
 	display: block;
 	overflow: hidden;
 	height: 18px;
+    max-width: 150px;
+    margin: auto;
 }
 
 

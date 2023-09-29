@@ -10,7 +10,6 @@
     $webComp = new WebComp($manager->getCkLangCode());
     include __DIR__ . $webComp->getLangFile();
 
-
     if($manager->validateToken()) {
         $usrObj = Usr::factory();
         $usrObj = $usrObj->getUsrByIdUsr($manager->getSeIdUsr())[0];
