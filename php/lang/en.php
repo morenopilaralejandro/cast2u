@@ -3,7 +3,7 @@
 <?=$str?>
 */
     $strWebName="Cast2u";
-    $strKeyWords="wiiu web app application";  
+    $strKeyWords="wiiu, web, app, application";  
     $strDescription="Play videos on your console";
     $strAuthor="Alejandro Moreno";
 
